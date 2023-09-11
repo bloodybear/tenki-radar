@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일본 비구름 레이더</title>
+    <meta property="og:image" content="" id="ogImage">
+    <script>
+        function updateImageUrl() {
+            let currentDate = new Date();
+            let year = currentDate.getFullYear();
+            let month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+            let day = ('0' + currentDate.getDate()).slice(-2);
+            let hours = ('0' + currentDate.getHours()).slice(-2);
+
+            // 30분 정도 지나야 레이더 이미지가 생성된다
+            if (currentDate.getMinutes() < 30) {
+                hours = ('0' + new Date(currentDate.getTime() - 3600 * 1000).getHours()).slice(-2);
+            }
+
+            let imageUrl = `https://storage.tenki.jp/archive/radar/${year}/${month}/${day}/${hours}/00/00/japan-detail-large.jpg`;
+
+            document.getElementById("currentDate").textContent = `${year}-${month}-${day} ` + currentDate.toTimeString();
+            document.getElementById("radarImage").src = imageUrl;
+            document.getElementById("ogImage").content = imageUrl;
+        }
+
+        window.onload = updateImageUrl;
+    </script>
+</head>
+<body>
+    <p>현재 시간: <span id="currentDate"></span></p>
+    <img id="radarImage" src="" alt="일본 비구름 레이더 이미지">
+</body>

@@ -1,4 +1,4 @@
 ---
-redirect_to: "http://example.com"
+redirect_to: "https://tenki.jp/radar/"
 ---
 index
